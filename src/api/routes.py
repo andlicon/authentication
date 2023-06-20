@@ -1,9 +1,6 @@
-"""
-This module takes care of starting the API Server, Loading the DB and Adding the endpoints
-"""
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
-from api.utils import generate_sitemap, APIException, is_valid_email, is_valid_password
+from api.utils import generate_sitemap, APIException, is_valid_email, is_valid_password, set_password, check_password, generate_salt
 
 api = Blueprint('api', __name__)
 
@@ -23,4 +20,15 @@ def add_user():
     if not is_valid_email(email):
         return jsonify({'message': 'Invalid email'}), 400
 
-    return jsonify({"message": "ok"}), 200
+    salt = generate_salt()
+    password = set_password(password, salt)
+    user = User(email=email, password=password, salt=salt)
+
+    try:
+        db.session.add(user)
+        print('aaa')
+        db.session.commit()
+        return jsonify({'message': 'User created'}), 200
+    except Exception as exception:
+        db.session.rollback()
+        return jsonify({'message': f'Error {exception.args}'}), 500

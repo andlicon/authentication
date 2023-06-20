@@ -1,5 +1,8 @@
 from flask import jsonify, url_for
 import re
+from werkzeug.security import generate_password_hash, check_password_hash
+from base64 import b64encode
+import os
 
 class APIException(Exception):
     status_code = 400
@@ -42,6 +45,15 @@ def is_valid_password(password, MIN_LENGTH=8, MAX_LENGTH=20):
         return False
     
     return True
+
+def set_password(password, salt):
+    return generate_password_hash(f'{password}{salt}')
+
+def check_password(password_hashed, password):
+    return check_password_hash(password_hashed, password)
+
+def generate_salt():
+    return b64encode(os.urandom(32)).decode('utf-8')
 
 def has_no_empty_params(rule):
     defaults = rule.defaults if rule.defaults is not None else ()
