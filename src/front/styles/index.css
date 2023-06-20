@@ -6,5 +6,9 @@
 }
 
 .navbar + .container {
-    min-height: 86.5vh;
+    min-height: 86.4vh;
+}
+
+p {
+    margin: 0;
 }

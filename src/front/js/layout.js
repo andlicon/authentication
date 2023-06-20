@@ -5,6 +5,7 @@ import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/Home.jsx";
 import SignUp from "./pages/SignUp.jsx";
+import SignIn from "./pages/SignIn.jsx";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar.jsx";
@@ -26,6 +27,7 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<SignUp />} path="/signup" />
+                        <Route element={<SignIn />} path="/signin" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
