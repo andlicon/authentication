@@ -1,10 +1,12 @@
 import React from 'react';
+// component
+import SignUpForm from '../component/SignUpForm.jsx'
 
-const SignIn = () => {
+const SignUp = () => {
   return (
     <div className='container container--centrado'>
-      <p>Funciona</p>
+      <SignUpForm />
     </div>
   )
 }
-export default SignIn;
+export default SignUp;
