@@ -13,14 +13,14 @@ export const Navbar = () => {
           </span>
         </Link>
         <div className='ml-auto'>
-          <Link to='/signin' className='links'>
+          <Link to='/signup' className='links'>
             <button className='btn btn-primary'>
-              Sign in
+              Sign Up
             </button>
           </Link>
-          <Link to='/login' className='links'>
+          <Link to='/signin' className='links'>
             <button className='btn btn-primary'>
-              Login
+              Sign In
             </button>
           </Link>
         </div>
