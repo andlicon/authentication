@@ -28,7 +28,6 @@ def add_user():
 
     try:
         db.session.add(user)
-        print('aaa')
         db.session.commit()
         return jsonify({'message': 'User created'}), 200
     except Exception as exception:
