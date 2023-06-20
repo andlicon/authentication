@@ -1,4 +1,5 @@
 from flask import jsonify, url_for
+import re
 
 class APIException(Exception):
     status_code = 400
@@ -14,6 +15,33 @@ class APIException(Exception):
         rv = dict(self.payload or ())
         rv['message'] = self.message
         return rv
+
+def is_valid_email(email):
+    condicion_correo = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])"
+    return re.match(condicion_correo, email) is not None
+
+def is_valid_password(password, MIN_LENGTH=8, MAX_LENGTH=20):
+    if len(password) < MIN_LENGTH or len(password) > MAX_LENGTH:
+        return False
+
+    lower, upper, digit, special = 0, 0, 0, 0
+
+    for char in password:
+        if char.islower():
+            lower += 1
+        elif char.isupper():
+            upper += 1
+        elif char.isdigit():
+            digit += 1
+        elif char in ['@', '-', '_']:
+            special += 1
+        else:
+            return False
+
+    if 0 in [lower, upper, digit, special]:
+        return False
+    
+    return True
 
 def has_no_empty_params(rule):
     defaults = rule.defaults if rule.defaults is not None else ()
