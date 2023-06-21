@@ -14,7 +14,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white"
         }
       ],
-      token: localStorage.getItem('token') || null
+      token: sessionStorage.getItem('token') || null
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -61,7 +61,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           if (response.ok) {
             setStore({ 'token': data.token })
-            localStorage.setItem('token', data.token)
+            sessionStorage.setItem('token', data.token)
             console.log('Login successful');  //Generar una alerta
             return true;
           }
@@ -76,7 +76,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
       logOut: () => {
-        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
         setStore({ 'token': null });
       }
     }
