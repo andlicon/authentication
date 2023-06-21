@@ -9,8 +9,8 @@ export const Navbar = () => {
   const { token } = store;
   const { logOut } = actions;
 
-  const onClick = () => {
-    console.log(logOut);
+  const onClickHandler = () => {
+    logOut()
   }
 
   return (
@@ -48,7 +48,7 @@ export const Navbar = () => {
                 <Link to='/' className='links'>
                   <button
                     className='btn btn-primary'
-                    onClick={logOut}>
+                    onClick={onClickHandler}>
                     Log Out
                   </button>
                 </Link>

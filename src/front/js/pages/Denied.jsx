@@ -3,7 +3,7 @@ import React from 'react';
 const Denied = () => {
   return (
     <div className='container'>
-      You dont have permise
+      You dont have permission
     </div>
   );
 };

@@ -36,8 +36,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
       logOut: () => {
+        const { throwAlert } = getActions();
+
         sessionStorage.removeItem('token');
-        setStore({ 'token': null });  //Generar alerta
+        setStore({ 'token': null });
+        throwAlert('Logged out successful', true)
       },
       throwAlert: (message, type) => {
         let newAlert = null;
