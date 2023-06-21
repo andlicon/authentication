@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Context } from '../store/appContext.js'
 import '../../styles/signupForm.css';
 
@@ -10,9 +9,8 @@ const initialValues = {
 
 const SignUpForm = () => {
   const [credentials, setCredentials] = useState(initialValues)
-  const navigate = useNavigate();
   const { actions } = useContext(Context);
-  const { login } = actions;
+  const { signUp } = actions;
 
   const onChangeHandler = ({ target }) => {
     const name = target.name;
@@ -25,13 +23,7 @@ const SignUpForm = () => {
 
   const submitHandler = async event => {
     event.preventDefault();
-    const successful = await login(credentials);
-
-    if (successful) {
-      setCredentials(initialValues)
-      navigate('/private');
-    }
-
+    await signUp(credentials);
   }
 
   return (
@@ -42,24 +34,24 @@ const SignUpForm = () => {
         Sign Up
       </h2>
       <div className='group'>
-        <label htmlFor='emailInput' className='group-label'>
+        <label htmlFor='email' className='group-label'>
           Email
         </label>
         <input
           type='text'
-          id='emailInput'
+          id='email'
           className='group-input'
           name='email'
           value={credentials.email}
           onChange={onChangeHandler} />
       </div>
       <div className='group'>
-        <label htmlFor='passwordInput' className='group-label'>
+        <label htmlFor='password' className='group-label'>
           Password
         </label>
         <input
           type='password'
-          id='passwordInput'
+          id='password'
           className='group-input'
           name='password'
           value={credentials.password}

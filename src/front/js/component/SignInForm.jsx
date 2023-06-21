@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Context } from '../store/appContext.js'
 import '../../styles/signinForm.css';
 
@@ -9,8 +10,9 @@ const initialValues = {
 
 const SignInForm = () => {
   const [credentials, setCredentials] = useState(initialValues)
+  const navigate = useNavigate();
   const { actions } = useContext(Context);
-  const { signIn } = actions;
+  const { login } = actions;
 
   const onChangeHandler = ({ target }) => {
     const name = target.name;
@@ -23,7 +25,13 @@ const SignInForm = () => {
 
   const submitHandler = async event => {
     event.preventDefault();
-    await signIn(credentials);
+    const successful = await login(credentials);
+
+    if (successful) {
+      setCredentials(initialValues)
+      navigate('/private');
+    }
+
   }
 
   return (

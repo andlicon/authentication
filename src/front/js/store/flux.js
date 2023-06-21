@@ -56,7 +56,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           'alert': newAlert
         });
       },
-      signIn: async (credentials) => {
+      signUp: async (credentials) => {
         const { throwAlert } = getActions();
 
         try {
