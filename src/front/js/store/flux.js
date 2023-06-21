@@ -55,6 +55,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({
           'alert': newAlert
         });
+      },
+      signIn: event => {
+        console.log('Sign In');
       }
     }
   };

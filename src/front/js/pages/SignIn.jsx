@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Context } from '../store/appContext.js'
+import SignInForm from '../component/SignInForm.jsx'
 import '../../styles/signin.css';
 
 const SignIn = () => {
@@ -16,7 +17,7 @@ const SignIn = () => {
 
   return (
     <div className='container container--centrado'>
-      INICIA SESIÓN
+      <SignInForm />
     </div>
   );
 };
