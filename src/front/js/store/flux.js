@@ -40,11 +40,17 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ 'token': null });  //Generar alerta
       },
       throwAlert: (message, type) => {
-        setStore({
-          'alert': {
+        let newAlert = null;
+
+        if (message != null && type != null) {
+          newAlert = {
             message: message,
             type: type
           }
+        }
+
+        setStore({
+          'alert': newAlert
         });
       }
     }

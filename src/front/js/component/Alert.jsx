@@ -7,19 +7,24 @@ const EXITO = true;
 
 const Alert = () => {
   const [visible, setVisible] = useState(true);
-  const { store } = useContext(Context);
+  const { store, actions } = useContext(Context);
+  const { throwAlert } = actions;
   const { alert } = store;
   const { message, type } = alert;
 
   const handlerOnClick = () => {
     setVisible(false);
+    throwAlert(null, null);
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      setVisible(false);
-    }, 2500);
-  }, []);
+    if (alert != null) {
+      setTimeout(() => {
+        setVisible(false);
+        throwAlert(null, null);
+      }, 2500);
+    }
+  }, [alert]);
 
   return (
     <>
