@@ -6,6 +6,8 @@ import { BackendURL } from "./component/backendURL";
 import { Home } from "./pages/Home.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import SignIn from "./pages/SignIn.jsx";
+import Private from "./pages/Private.jsx";
+import Denied from "./pages/Denied.jsx";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar.jsx";
@@ -13,28 +15,30 @@ import { Footer } from "./component/footer";
 
 //create your first component
 const Layout = () => {
-    //the basename is used when your project is published in a subdirectory and not in the root of the domain
-    // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
-    const basename = process.env.BASENAME || "";
+  //the basename is used when your project is published in a subdirectory and not in the root of the domain
+  // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
+  const basename = process.env.BASENAME || "";
 
-    if(!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL/ >;
+  if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
-    return (
-        <div>
-            <BrowserRouter basename={basename}>
-                <ScrollToTop>
-                    <Navbar />
-                    <Routes>
-                        <Route element={<Home />} path="/" />
-                        <Route element={<SignUp />} path="/signup" />
-                        <Route element={<SignIn />} path="/signin" />
-                        <Route element={<h1>Not found!</h1>} />
-                    </Routes>
-                    <Footer />
-                </ScrollToTop>
-            </BrowserRouter>
-        </div>
-    );
+  return (
+    <div>
+      <BrowserRouter basename={basename}>
+        <ScrollToTop>
+          <Navbar />
+          <Routes>
+            <Route element={<Home />} path="/" />
+            <Route element={<SignUp />} path="/signup" />
+            <Route element={<SignIn />} path="/signin" />
+            <Route element={<Denied />} path="/denied" />
+            <Route element={<Private />} path="/private" />
+            <Route element={<h1>Not found!</h1>} />
+          </Routes>
+          <Footer />
+        </ScrollToTop>
+      </BrowserRouter>
+    </div>
+  );
 };
 
 export default injectContext(Layout);

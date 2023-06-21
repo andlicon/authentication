@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Context } from '../store/appContext.js'
 import '../../styles/signupForm.css';
 
@@ -9,6 +10,7 @@ const initialValues = {
 
 const SignUpForm = () => {
   const [credentials, setCredentials] = useState(initialValues)
+  const navigate = useNavigate();
   const { actions } = useContext(Context);
   const { login } = actions;
 
@@ -21,11 +23,14 @@ const SignUpForm = () => {
     })
   }
 
-  const submitHandler = event => {
+  const submitHandler = async event => {
     event.preventDefault();
-    const successful = login(credentials);
+    const successful = await login(credentials);
 
-    if (successful) setCredentials(initialValues)
+    if (successful) {
+      setCredentials(initialValues)
+      navigate('/private');
+    }
   }
 
   return (
