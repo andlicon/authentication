@@ -56,8 +56,32 @@ const getState = ({ getStore, getActions, setStore }) => {
           'alert': newAlert
         });
       },
-      signIn: event => {
-        console.log('Sign In');
+      signIn: async (credentials) => {
+        const { throwAlert } = getActions();
+
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/signup`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(credentials)
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            throwAlert('User created successful', true);
+          }
+          else {
+            throwAlert(data.message, false);
+          }
+
+        }
+        catch (error) {
+          console.log(error);
+          throwAlert('Some critical error ocurred', false);
+        }
       }
     }
   };

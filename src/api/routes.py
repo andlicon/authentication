@@ -6,7 +6,7 @@ from flask_jwt_extended import create_access_token
 api = Blueprint('api', __name__)
 
 
-@api.route('/singup', methods=['POST'])
+@api.route('/signup', methods=['POST'])
 def add_user():
     if not request.is_json:
         return jsonify({'message': 'Body must be a valid json item'}), 400
