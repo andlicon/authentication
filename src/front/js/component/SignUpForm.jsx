@@ -31,6 +31,7 @@ const SignUpForm = () => {
       setCredentials(initialValues)
       navigate('/private');
     }
+
   }
 
   return (

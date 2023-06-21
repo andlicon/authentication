@@ -14,7 +14,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white"
         }
       ],
-      token: null
+      token: localStorage.getItem('token') || null
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -74,7 +74,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log(exception)
           return false
         }
-
+      },
+      logOut: () => {
+        localStorage.removeItem('token');
+        setStore({ 'token': null });
       }
     }
   };

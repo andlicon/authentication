@@ -14,9 +14,9 @@ const Private = () => {
   }, []);
 
   return (
-    <>
+    <div className='container'>
       BIENVENIDO A LA PÁGINA
-    </>
+    </div>
   );
 };
 export default Private;
