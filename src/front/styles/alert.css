@@ -1,0 +1,29 @@
+.alert {
+  /* caja */
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  /* posicion */
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  bottom: 1em;
+  /* estilo */
+  color: white;
+}
+
+.alert__message {
+  /* box */
+  margin: 0;
+  padding: 0.7em;
+  border-radius: 8px;
+}
+
+.alert--exito {
+  background-color: green;
+}
+
+.alert--error {
+  background-color: red;
+}
