@@ -44,10 +44,14 @@ def login():
     email = body.get('email', None)
     password = body.get('password', None)
 
+    if None in [email, password]:
+        return jsonify({'message': 'Wrong json item'}), 400
+    
     user = User.query.filter_by(email=email).one_or_none()
+
     if user is None:
         return jsonify({'message': 'Wrong password or email'}), 400
-
+    
     user_password = user.password
     user_salt = user.salt
     if not check_password(user_password, f'{password}{user_salt}'):

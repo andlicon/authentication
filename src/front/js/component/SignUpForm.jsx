@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Context } from '../store/appContext.js'
 import '../../styles/signupForm.css';
 
 const initialValues = {
@@ -8,6 +9,8 @@ const initialValues = {
 
 const SignUpForm = () => {
   const [credentials, setCredentials] = useState(initialValues)
+  const { actions } = useContext(Context);
+  const { login } = actions;
 
   const onChangeHandler = ({ target }) => {
     const name = target.name;
@@ -20,12 +23,14 @@ const SignUpForm = () => {
 
   const submitHandler = event => {
     event.preventDefault();
+    const successful = login(credentials);
+
+    if (successful) setCredentials(initialValues)
   }
 
   return (
     <form
       className='signupForm bg-light'
-      onChange={onChangeHandler}
       onSubmit={submitHandler}>
       <h2 className='signupForm-title'>
         Sign Up
@@ -38,7 +43,9 @@ const SignUpForm = () => {
           type='text'
           id='emailInput'
           className='group-input'
-          name='email' />
+          name='email'
+          value={credentials.email}
+          onChange={onChangeHandler} />
       </div>
       <div className='group'>
         <label htmlFor='passwordInput' className='group-label'>
@@ -48,7 +55,9 @@ const SignUpForm = () => {
           type='password'
           id='passwordInput'
           className='group-input'
-          name='password' />
+          name='password'
+          value={credentials.password}
+          onChange={onChangeHandler} />
       </div>
       <button>
         Sign Up
