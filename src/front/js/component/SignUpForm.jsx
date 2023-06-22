@@ -46,6 +46,7 @@ const SignUpForm = () => {
     <form
       className='signupForm bg-light needs-validation'
       onSubmit={submitHandler}>
+
       <h2 className='signupForm-title'>
         Sign Up
       </h2>
@@ -58,6 +59,7 @@ const SignUpForm = () => {
           id='email'
           className='group-input'
           name='email'
+          placeholder='doe@hotmail.com'
           value={credentials.email}
           onChange={onChangeHandler} />
       </div>
@@ -71,15 +73,8 @@ const SignUpForm = () => {
           className='group-input'
           name='password'
           value={credentials.password}
+          placeholder='********'
           onChange={onChangeHandler} />
-      </div>
-
-      <div className='col-md-4 position-relative'>
-        <label htmlFor='validationTooltip01' className='form-label'>First name</label>
-        <input type='text' className='form-control' id='validationTooltip01' required />
-        <div className='valid-tooltip'>
-          Looks good!
-        </div>
       </div>
 
       <button>

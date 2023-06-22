@@ -51,6 +51,7 @@ const SignInForm = () => {
           className='group-input'
           name='email'
           value={credentials.email}
+          placeholder='doe@hotmail.com'
           onChange={onChangeHandler} />
       </div>
       <div className='group'>
@@ -62,6 +63,7 @@ const SignInForm = () => {
           id='password'
           className='group-input'
           name='password'
+          placeholder='********'
           value={credentials.password}
           onChange={onChangeHandler} />
       </div>
