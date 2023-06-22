@@ -44,5 +44,18 @@ export const isValidPassword = (password, MIN_LENGTH = 8, MAX_LENGTH = 20) => {
 }
 
 export const isValidEmail = email => {
-  return true;
+  const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+  const isValidOne = emailRegex.test(email);
+
+  if (!isValidOne) {
+    return {
+      'emailValidate': false,
+      'emailMessage': 'Is not a valid email'
+    }
+  }
+
+  return {
+    'emailValidate': true,
+    'emailMessage': 'ok'
+  }
 }

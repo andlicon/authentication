@@ -38,7 +38,7 @@ const SignUpForm = () => {
       return null;
     }
 
-    // await signUp(credentials);
+    await signUp(credentials);
 
   }
 
