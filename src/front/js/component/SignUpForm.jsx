@@ -26,25 +26,25 @@ const SignUpForm = () => {
     // Validar hotmail y validar clave
     event.preventDefault();
 
-    const passwordValidate = isValidPassword(credentials.password);
-    const emailValidate = isValidEmail(credentials.email);
+    const { passwordValid, passwordMessage } = isValidPassword(credentials.password);
+    const { emailValidate, emailMessage } = isValidEmail(credentials.email);
 
     if (!emailValidate) {
-
+      console.log(emailMessage)
       return null;
     }
-    if (!passwordValidate) {
-
+    if (!passwordValid) {
+      console.log(passwordMessage)
       return null;
     }
 
-    await signUp(credentials);
+    // await signUp(credentials);
 
   }
 
   return (
     <form
-      className='signupForm bg-light'
+      className='signupForm bg-light needs-validation'
       onSubmit={submitHandler}>
       <h2 className='signupForm-title'>
         Sign Up
@@ -73,6 +73,15 @@ const SignUpForm = () => {
           value={credentials.password}
           onChange={onChangeHandler} />
       </div>
+
+      <div className='col-md-4 position-relative'>
+        <label htmlFor='validationTooltip01' className='form-label'>First name</label>
+        <input type='text' className='form-control' id='validationTooltip01' required />
+        <div className='valid-tooltip'>
+          Looks good!
+        </div>
+      </div>
+
       <button>
         Sign Up
       </button>
