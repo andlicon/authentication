@@ -1,0 +1,64 @@
+.signin-title {
+  text-align: center;
+}
+
+.login {
+  display: flex;
+  flex-flow: row nowrap;
+  border-radius: 2em;
+  border: 1.5px solid lightblue;
+}
+
+.signinForm {
+  padding: 1em;
+}
+
+.login-presentation {
+  position: relative;
+  padding: 1em;
+  border-left: 1px solid lightblue;
+}
+
+.login-presentation-image {
+  width: 100%;
+}
+
+.login-presentation__title {
+  position: absolute;
+  margin: 0;
+  left: 0;
+  bottom: 1em;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+}
+
+@media (max-width: 575.98px) {
+  .login {
+    flex-flow: column nowrap;
+  }
+
+  .login-presentation__title {
+    font-size: 2rem;
+    bottom: 0.5em;
+  }
+
+  .login-presentation {
+    border: 0;
+    border-top: 1px solid lightblue;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .login-presentation__title {
+    font-size: 1.5rem;
+    bottom: 0.3em;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .login-presentation__title {
+    font-size: 1.5rem;
+    bottom: 0.7em;
+  }
+}
