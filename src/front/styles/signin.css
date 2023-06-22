@@ -3,32 +3,55 @@
 }
 
 .login {
-  display: flex;
-  flex-flow: row nowrap;
+  /* box-model */
   border-radius: 2em;
   border: 1.5px solid lightblue;
+  /* position */
+  display: flex;
+  flex-flow: row nowrap;
 }
 
 .signinForm {
+  /* box-model */
   padding: 1em;
+  /* position */
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.signinForm .login-button {
+  margin-top: 0.5em;
+}
+
+.siginForm .signin-title {
+  margin-bottom: 0.5em;
 }
 
 .login-presentation {
-  position: relative;
+  /* box-model */
   padding: 1em;
   border-left: 1px solid lightblue;
+  /* position */
+  position: relative;
 }
 
 .login-presentation-image {
   width: 100%;
+  max-height: 400px;
 }
 
 .login-presentation__title {
-  position: absolute;
+  /* box-model */
+  width: 100%;
   margin: 0;
+  /* position */
+  position: absolute;
   left: 0;
   bottom: 1em;
-  width: 100%;
+  /* style */
   text-align: center;
   font-size: 2rem;
 }

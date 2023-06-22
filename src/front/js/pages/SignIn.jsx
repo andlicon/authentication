@@ -53,33 +53,33 @@ const SignIn = () => {
           <h2 className='signin-title'>
             Sign In
           </h2>
-          <div className='group'>
+          <div className='form-group group'>
             <label htmlFor='email' className='group-label'>
               Email
             </label>
             <input
               type='text'
               id='email'
-              className='group-input'
+              className='group-input form-control'
               name='email'
               value={credentials.email}
               placeholder='doe@hotmail.com'
               onChange={onChangeHandler} />
           </div>
-          <div className='group'>
+          <div className='group form-group'>
             <label htmlFor='password' className='group-label'>
               Password
             </label>
             <input
               type='password'
               id='password'
-              className='group-input'
+              className='group-input form-control'
               name='password'
               placeholder='********'
               value={credentials.password}
               onChange={onChangeHandler} />
           </div>
-          <button>
+          <button className='login-button'>
             Sign In
           </button>
         </form>

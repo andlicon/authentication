@@ -36,14 +36,3 @@
   bottom: 0;
   left: 0;
 }
-
-.group {
-  /* box-model */
-  width: 100%;
-  padding: 0 1em;
-  /* position */
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-  justify-content: space-between;
-}
