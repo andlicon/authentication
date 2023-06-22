@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Context } from '../store/appContext.js'
+import { isValidPassword, isValidEmail } from '../util.js'
 import '../../styles/signupForm.css';
 
 const initialValues = {
@@ -22,8 +23,23 @@ const SignUpForm = () => {
   }
 
   const submitHandler = async event => {
+    // Validar hotmail y validar clave
     event.preventDefault();
+
+    const passwordValidate = isValidPassword(credentials.password);
+    const emailValidate = isValidEmail(credentials.email);
+
+    if (!emailValidate) {
+
+      return null;
+    }
+    if (!passwordValidate) {
+
+      return null;
+    }
+
     await signUp(credentials);
+
   }
 
   return (
