@@ -52,44 +52,58 @@ const SignUp = () => {
 
   return (
     <div className='container container--centrado'>
-      <form
-        className='signupForm bg-light needs-validation'
-        onSubmit={submitHandler}>
+      <div className="signup bg-light">
+        <form
+          className='signupForm needs-validation'
+          onSubmit={submitHandler}>
+          <h2 className='signup__title'>
+            Sign Up
+          </h2>
+          <div className='group form-group'>
+            <label htmlFor='email' className='group-label'>
+              Email
+            </label>
+            <input
+              type='text'
+              id='email'
+              className='group-input form-control'
+              name='email'
+              placeholder='doe@hotmail.com'
+              value={credentials.email}
+              onChange={onChangeHandler} />
+          </div>
+          <div className='group form-group'>
+            <label htmlFor='password' className='group-label'>
+              Password
+            </label>
+            <input
+              type='password'
+              id='password'
+              className='group-input form-control'
+              name='password'
+              value={credentials.password}
+              placeholder='********'
+              onChange={onChangeHandler} />
+          </div>
+          <button>
+            Sign Up
+          </button>
+        </form>
 
-        <h2 className='signupForm-title'>
-          Sign Up
-        </h2>
-        <div className='group'>
-          <label htmlFor='email' className='group-label'>
-            Email
-          </label>
-          <input
-            type='text'
-            id='email'
-            className='group-input'
-            name='email'
-            placeholder='doe@hotmail.com'
-            value={credentials.email}
-            onChange={onChangeHandler} />
+        <div className="signup__instructions">
+          <h2 className='signup__title'>
+            Password instructions
+          </h2>
+          <ul>
+            <li>It must be bigger than 8 characters long.</li>
+            <li>It must be less than 20 characters long.</li>
+            <li>It must contain at least 1 lowercase character.</li>
+            <li>It must contain at least 1 uppercase character.</li>
+            <li>It must contain at least 1 special character as <span className='bold'>@ _ -</span></li>
+            <li>It must contain at least 1 number.</li>
+          </ul>
         </div>
-        <div className='group'>
-          <label htmlFor='password' className='group-label'>
-            Password
-          </label>
-          <input
-            type='password'
-            id='password'
-            className='group-input'
-            name='password'
-            value={credentials.password}
-            placeholder='********'
-            onChange={onChangeHandler} />
-        </div>
-
-        <button>
-          Sign Up
-        </button>
-      </form>
+      </div>
     </div>
   )
 }

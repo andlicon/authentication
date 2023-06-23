@@ -1,0 +1,46 @@
+.signup {
+  /* box-model */
+  border-radius: 2em;
+  border: 1.5px solid lightblue;
+  /* position */
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.signupForm {
+  /* box-model */
+  padding: 1em;
+  border-radius: 2em;
+  /* position */
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.signup__instructions {
+  padding: 1em;
+  border-left: 1px solid lightblue;
+}
+
+.signup__title {
+  margin-bottom: 0.5em;
+  text-align: center;
+}
+
+@media (max-width: 575.98px) {
+  .signup {
+    flex-flow: column nowrap;
+  }
+
+  .signup__title {
+    font-size: 2rem;
+    bottom: 0.5em;
+  }
+
+  .signup__instructions {
+    border: 0;
+    border-top: 1px solid lightblue;
+  }
+}
