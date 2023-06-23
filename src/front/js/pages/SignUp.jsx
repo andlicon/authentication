@@ -71,9 +71,6 @@ const SignUp = () => {
             placeholder='doe@hotmail.com'
             value={credentials.email}
             onChange={onChangeHandler} />
-          <div id='emailFeedback' className='invalid-feedback'>
-            Please enter a message in the textarea.
-          </div>
         </div>
         <div className='group'>
           <label htmlFor='password' className='group-label'>
