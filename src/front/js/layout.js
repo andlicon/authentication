@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp.jsx";
 import SignIn from "./pages/SignIn.jsx";
 import Private from "./pages/Private.jsx";
 import Denied from "./pages/Denied.jsx";
+import PostDetails from "./pages/PostDetails.jsx";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar.jsx";
@@ -31,6 +32,7 @@ const Layout = () => {
             <Route element={<Home />} path="/" />
             <Route element={<SignUp />} path="/signup" />
             <Route element={<SignIn />} path="/signin" />
+            <Route element={<PostDetails />} path="/private/:postId" />
             <Route element={<Denied />} path="/denied" />
             <Route element={<Private />} path="/private" />
             <Route element={<h1>Not found!</h1>} />

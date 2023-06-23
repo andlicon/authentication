@@ -103,17 +103,19 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
 
           const data = await response.json();
-          if (response.status == 401) {
+          if (!response.ok) {
             throwAlert(data.msg, false);
             setStore({ 'posts': null })
             setStore({ 'token': null })
-            return null;
           }
-
-          setStore({ 'posts': data })
+          else {
+            setStore({ 'posts': data })
+          }
         }
         catch (error) {
-          console.log(error);
+          throwAlert(error.msg, false);
+          setStore({ 'posts': null })
+          setStore({ 'token': null })
         }
 
       }

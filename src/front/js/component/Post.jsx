@@ -1,12 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 const Post = ({ post }) => {
   return (
     <div className='post'>
-      <h2 className='post__title'>
+      <Link className='post__title' to={`/private/${post.id}`}>
         {
           post.title
         }
-      </h2>
+      </Link>
       <p className='post__author'>
         {
           post.user_id
