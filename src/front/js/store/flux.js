@@ -85,27 +85,37 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
       loadPost: async () => {
-        if (getStore().token != null) {
-          const { token } = getStore()
+        const { token } = getStore()
+        const { throwAlert } = getActions();
 
-          try {
-            const response = await fetch(`${process.env.BACKEND_URL}/post`, {
-              headers: {
-                'Authorization': `Bearer ${token}`
-              }
-            });
-            const data = await response.json();
-
-            console.log(data);
-          }
-          catch (error) {
-            console.log(error);
-          }
-        }
-        else {
+        if (token == null) {
           setStore({ 'posts': null })
+          setStore({ 'token': null })
           history.pushState(null, '', '/denied');
+          return null;
         }
+
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/post`, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+
+          const data = await response.json();
+          if (response.status == 401) {
+            throwAlert(data.msg, false);
+            setStore({ 'posts': null })
+            setStore({ 'token': null })
+            return null;
+          }
+
+          setStore({ 'posts': data })
+        }
+        catch (error) {
+          console.log(error);
+        }
+
       }
     }
   };
