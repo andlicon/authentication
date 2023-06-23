@@ -2,7 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       alert: null,
-      token: sessionStorage.getItem('token') || null
+      token: sessionStorage.getItem('token') || null,
+      posts: []
     },
     actions: {
       login: async (credentials) => {
@@ -81,6 +82,29 @@ const getState = ({ getStore, getActions, setStore }) => {
         catch (error) {
           console.log(error);
           throwAlert('Some critical error ocurred', false);
+        }
+      },
+      loadPost: async () => {
+        if (getStore().token != null) {
+          const { token } = getStore()
+
+          try {
+            const response = await fetch(`${process.env.BACKEND_URL}/post`, {
+              headers: {
+                'Authorization': `Bearer ${token}`
+              }
+            });
+            const data = await response.json();
+
+            console.log(data);
+          }
+          catch (error) {
+            console.log(error);
+          }
+        }
+        else {
+          setStore({ 'posts': null })
+          history.pushState(null, '', '/denied');
         }
       }
     }

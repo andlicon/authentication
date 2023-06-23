@@ -5,9 +5,10 @@ import { Context } from '../store/appContext.js'
 const Private = () => {
   const navigate = useNavigate();
   const { store } = useContext(Context);
-  const { token } = store
 
   useEffect(() => {
+    const { token } = store
+
     if (token == null) {
       navigate('/denied')
     }
