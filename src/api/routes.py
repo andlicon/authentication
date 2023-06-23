@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Post, Message
 from api.utils import generate_sitemap, APIException, is_valid_email, is_valid_password, set_password, check_password, generate_salt
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, jwt_required
 
 api = Blueprint('api', __name__)
 
@@ -60,3 +60,25 @@ def login():
     token = create_access_token(identity=user.id)
 
     return jsonify({'token': token}), 200
+
+
+@api.route('/post', methods=['GET'])
+@jwt_required()
+def get_all_post():
+    posts = Post.query.all()
+
+    posts = list(map( lambda item: item.serialize(), posts ))
+
+    return jsonify(posts), 200
+
+@api.route('/post/<int:post_id>/messages', methods=['GET'])
+@jwt_required()
+def get_all_messages_from_post(post_id):
+    post = Post.query.get(post_id)
+
+    if post is None:
+        return {'message': 'Not found'}, 404
+    
+    messages = list(map(lambda item: item.serialize(), post.message))
+
+    return jsonify(messages), 200
