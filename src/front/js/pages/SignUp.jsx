@@ -40,6 +40,7 @@ const SignUp = () => {
     }
 
     await signUp(credentials);
+    setCredentials(initialValues)
   }
 
   useEffect(() => {
