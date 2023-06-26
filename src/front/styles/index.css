@@ -1,22 +1,36 @@
 .container--centrado {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .navbar+.container {
-    min-height: 86.4vh;
+  min-height: 86.4vh;
 }
 
 p {
-    margin: 0;
+  margin: 0;
 }
 
 .group {
-    width: 100%;
+  width: 100%;
 }
 
 .bold {
-    font-weight: 700;
+  font-weight: 700;
+}
+
+textArea {
+  resize: none;
+}
+
+.container--post {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+
+.container {
+  margin-bottom: 0.5em;
 }

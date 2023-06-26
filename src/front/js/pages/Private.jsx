@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Context } from '../store/appContext.js'
+import PostForm from '../component/PostForm.jsx';
 import Post from '../component/Post.jsx';
 
 const Private = () => {
@@ -21,14 +22,19 @@ const Private = () => {
   }, [store.posts]);
 
   return (
-    <div className='container'>
-      {
-        posts && posts.map(post => {
-          return (
-            <Post key={post.id} post={post} />
-          )
-        })
-      }
+    <div className='container container--post'>
+      <div className='post-section'>
+        {
+          posts && posts.map(post => {
+            return (
+              <Post key={post.id} post={post} />
+            )
+          })
+        }
+      </div>
+      <div className='postForm-section'>
+        <PostForm />
+      </div>
     </div>
   );
 };
