@@ -19,12 +19,15 @@ const PostForm = () => {
   }
 
   const handlerSubmit = async (event) => {
-    const { submitPost, loadPost } = actions;
-
     event.preventDefault();
+    const { submitPost, loadPost, throwAlert } = actions;
+
+    if (postInfo['title'].trim() == '' && postInfo['description'].trim() == '') {
+      throwAlert('Title and description must contain information', false);
+      return null;
+    }
 
     const response = await submitPost(postInfo);
-
     if (response) {
       loadPost();
       setPostInfo(initialValues);
