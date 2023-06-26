@@ -6,7 +6,7 @@
   /* posicion */
   display: flex;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 1em;
   /* estilo */
