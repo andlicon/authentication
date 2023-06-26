@@ -108,3 +108,14 @@ def create_post():
     except exception:
         db.session.rollback()
         return jsonify({'message': 'Some error ocurried, try again'}), 200
+
+
+@api.route('/user/<int:id>', methods=['GET'])
+@jwt_required()
+def get_user_by_id(id):
+    user = User.query.get(id)
+
+    if user is None:
+        return jsonify({'message': 'Not found'}), 404
+
+    return jsonify(user.serialize()), 200

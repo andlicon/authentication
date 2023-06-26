@@ -7,6 +7,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(250), nullable=False)
     salt = db.Column(db.String(80), nullable=False)
+    nickname = db.Column(db.String(20), nullable=False, unique=True)
 
     post = db.relationship('Post', backref='user', uselist=True)
     message = db.relationship('Message', backref='user')
@@ -17,6 +18,7 @@ class User(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "nickname": self.nickname,
             "email": self.email
         }
 

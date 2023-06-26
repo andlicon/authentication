@@ -36,6 +36,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           return false
         }
       },
+
       logOut: () => {
         const { throwAlert } = getActions();
 
@@ -57,6 +58,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           'alert': newAlert
         });
       },
+
       signUp: async (credentials) => {
         const { throwAlert } = getActions();
 
@@ -84,6 +86,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           throwAlert('Some critical error ocurred', false);
         }
       },
+
       loadPost: async () => {
         const { token } = getStore()
         const { throwAlert } = getActions();
@@ -96,33 +99,45 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
 
         try {
-          const response = await fetch(`${process.env.BACKEND_URL}/post`, {
+          let response = await fetch(`${process.env.BACKEND_URL}/post`, {
             headers: {
               'Authorization': `Bearer ${token}`
             }
           });
+          const postData = await response.json();
 
-          const data = await response.json();
           if (!response.ok) {
-            throwAlert(data.msg, false);
+            throwAlert(postData.msg, false);
             setStore({ 'posts': null })
             setStore({ 'token': null })
+            return null;
           }
-          else {
-            setStore({ 'posts': data })
+
+          for (let i = 0; i < postData.length; i++) {
+            const user_id = postData[i]['user_id'];
+            const response = await fetch(`${process.env.BACKEND_URL}/user/${user_id}`, {
+              headers: {
+                'Authorization': `Bearer ${token}`
+              }
+            });
+
+            const userData = await response.json();
+            postData[i]['user_nickname'] = userData.nickname;
           }
+
+          setStore({ 'posts': postData })
         }
         catch (error) {
+          console.log(error);
           throwAlert(error.msg, false);
           setStore({ 'posts': null })
           setStore({ 'token': null })
         }
       },
+
       submitPost: async (post) => {
         const { token } = getStore()
         const { throwAlert } = getActions();
-
-        console.log(post);
 
         try {
           const response = await fetch(`${process.env.BACKEND_URL}/post`, {
@@ -150,6 +165,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           return null;
         }
       }
+
     }
   };
 };

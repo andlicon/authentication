@@ -16,7 +16,7 @@ const Post = ({ post }) => {
       <div className="post__content">
         <p className='post__author'>
           {
-            post.user_id
+            post.user_nickname
           }
         </p>
         <p className='post__description'>
