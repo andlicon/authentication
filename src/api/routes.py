@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Post, Message
 from api.utils import generate_sitemap, APIException, is_valid_email, is_valid_password, set_password, check_password, generate_salt
-from flask_jwt_extended import create_access_token, jwt_required
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 api = Blueprint('api', __name__)
 
@@ -29,7 +29,7 @@ def add_user():
     try:
         db.session.add(user)
         db.session.commit()
-        return jsonify({'message': 'User created'}), 200
+        return jsonify({'message': 'User created'}), 201
     except Exception as exception:
         db.session.rollback()
         return jsonify({'message': f'Error {exception.args}'}), 500
@@ -82,3 +82,29 @@ def get_all_messages_from_post(post_id):
     messages = list(map(lambda item: item.serialize(), post.message))
 
     return jsonify(messages), 200
+
+
+@api.route('/post', methods=['POST'])
+@jwt_required()
+def create_post():
+    if not request.is_json:
+        return jsonify({'message': 'Body must be a valid json item'}), 400
+
+    body = request.json
+    title = body.get('title', None)
+    description = body.get('description', None)
+
+    if None in [title, description]:
+        return jsonify({'message': 'Wrong properties'}), 400
+
+    user_id = get_jwt_identity()
+
+    post = Post(user_id=user_id, title=title, description=description)
+    db.session.add(post)
+
+    try:
+        db.session.commit()
+        return jsonify(post.serialize()), 201
+    except exception:
+        db.session.rollback()
+        return jsonify({'message': 'Some error ocurried, try again'}), 200
