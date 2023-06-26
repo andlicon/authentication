@@ -14,8 +14,9 @@ def add_user():
     body = request.json
     email = body.get('email', None)
     password = body.get('password', None)
+    nickname = body.get('nickname', None)
 
-    if None in [email, password]:
+    if None in [email, password, nickname]:
         return jsonify({'message': 'Wrong properties'}), 400
     if not is_valid_password(password):
         return jsonify({'message': 'Invalid password'}), 400
@@ -24,7 +25,7 @@ def add_user():
 
     salt = generate_salt()
     password = set_password(password, salt)
-    user = User(email=email, password=password, salt=salt)
+    user = User(email=email, password=password, nickname=nickname, salt=salt)
 
     try:
         db.session.add(user)

@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+import enum
 
 db = SQLAlchemy()
 
@@ -22,11 +23,18 @@ class User(db.Model):
             "email": self.email
         }
 
+
+class Status(enum.Enum):
+    ACTIVE = 'active'
+    INACTIVE = 'inactive'
+
+
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     title = db.Column(db.String(80), nullable=False)
     description = db.Column(db.String(250), nullable=False)
+    status = db.Column(db.Enum(Status), nullable=False, default=Status.ACTIVE)
 
     message = db.relationship('Message', backref='post', uselist=True)
 

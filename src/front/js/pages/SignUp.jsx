@@ -6,7 +6,8 @@ import '../../styles/signup.css';
 
 const initialValues = {
   'email': '',
-  'password': ''
+  'password': '',
+  'nickname': ''
 }
 
 const SignUp = () => {
@@ -36,6 +37,10 @@ const SignUp = () => {
     }
     if (!passwordValid) {
       console.log(passwordMessage)
+      return null;
+    }
+    if (nickname == '') {
+      console.log('Wrong nickname')
       return null;
     }
 
@@ -71,6 +76,19 @@ const SignUp = () => {
               name='email'
               placeholder='doe@hotmail.com'
               value={credentials.email}
+              onChange={onChangeHandler} />
+          </div>
+          <div className='group form-group'>
+            <label htmlFor='nickname' className='group-label'>
+              Nickname
+            </label>
+            <input
+              type='text'
+              id='nickname'
+              className='group-input form-control'
+              name='nickname'
+              placeholder='doe'
+              value={credentials.nickname}
               onChange={onChangeHandler} />
           </div>
           <div className='group form-group'>
