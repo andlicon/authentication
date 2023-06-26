@@ -117,7 +117,38 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ 'posts': null })
           setStore({ 'token': null })
         }
+      },
+      submitPost: async (post) => {
+        const { token } = getStore()
+        const { throwAlert } = getActions();
 
+        console.log(post);
+
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/post`, {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(post)
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throwAlert(data.message, false);
+            return null;
+          }
+
+          throwAlert('Post created successfully', true);
+          return data;
+        }
+        catch (error) {
+          console.log(error);
+          throwAlert(error.message, false);
+          return null;
+        }
       }
     }
   };

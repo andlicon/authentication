@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Context } from '../store/appContext.js';
 import '../../styles/postForm.css';
 
 const initialValues = {
@@ -7,6 +8,7 @@ const initialValues = {
 }
 
 const PostForm = () => {
+  const { actions } = useContext(Context);
   const [postInfo, setPostInfo] = useState(initialValues);
 
   const changeHandler = ({ target }) => {
@@ -16,8 +18,21 @@ const PostForm = () => {
     })
   }
 
+  const handlerSubmit = async (event) => {
+    const { submitPost, loadPost } = actions;
+
+    event.preventDefault();
+
+    const response = await submitPost(postInfo);
+
+    if (response) {
+      loadPost();
+      setPostInfo(initialValues);
+    }
+  }
+
   return (
-    <form className='postForm'>
+    <form className='postForm' onSubmit={handlerSubmit}>
       <h2 className='postForm__title text-primary'>
         New post
       </h2>
@@ -47,7 +62,7 @@ const PostForm = () => {
           className='group-input form-control'></textarea>
       </div>
       <button
-        type='button'
+        type='submit'
         className='btn btn-primary group-input form-control w-50 postform__submit'>
         Post it!
       </button>
