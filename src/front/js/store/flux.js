@@ -174,7 +174,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           return element.id == postId
         });
 
-        return post;
+        return post.length > 0 ? post[0] : null;
       }
 
     }
