@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       alert: null,
       token: sessionStorage.getItem('token') || null,
-      posts: []
+      posts: JSON.parse(sessionStorage.getItem('posts')) || [],
     },
     actions: {
       login: async (credentials) => {
@@ -126,6 +126,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
 
           setStore({ 'posts': postData })
+          sessionStorage.setItem('posts', JSON.stringify(postData))
         }
         catch (error) {
           console.log(error);
@@ -164,6 +165,16 @@ const getState = ({ getStore, getActions, setStore }) => {
           throwAlert(error.message, false);
           return null;
         }
+      },
+
+      getOnePost: (postId) => {
+        const { posts } = getStore();
+
+        const post = posts.filter(element => {
+          return element.id == postId
+        });
+
+        return post;
       }
 
     }
