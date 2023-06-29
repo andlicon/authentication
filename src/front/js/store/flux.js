@@ -75,16 +75,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           if (response.ok) {
             throwAlert('User created successful', true);
+            return true;
           }
           else {
             throwAlert(data.message, false);
           }
-
         }
         catch (error) {
           console.log(error);
           throwAlert('Some critical error ocurred', false);
         }
+
+        return false;
       },
 
       loadPost: async () => {

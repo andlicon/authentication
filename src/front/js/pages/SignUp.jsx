@@ -44,15 +44,19 @@ const SignUp = () => {
       return null;
     }
 
-    await signUp(credentials);
-    setCredentials(initialValues)
+    const successful = await signUp(credentials);
+
+    if (successful) {
+      navigate('/signin');
+      setCredentials(initialValues);
+    }
   }
 
   useEffect(() => {
     const { token } = store
 
     if (token != null) {
-      navigate('/private')
+      navigate('/private');
     }
   }, []);
 
